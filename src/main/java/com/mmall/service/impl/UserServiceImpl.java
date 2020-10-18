@@ -1,5 +1,4 @@
 package com.mmall.service.impl;
-
 import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
 import com.mmall.common.TokenCache;
@@ -92,10 +91,35 @@ public class UserServiceImpl implements IUserService {
         if (resultCount>0){
             //说明问题及答案是这个用户的，并且是正确的
             String forgetToken= UUID.randomUUID().toString();
-            TokenCache.setKey("token_"+username,forgetToken);
+            TokenCache.setKey(TokenCache.TOKEN_PREFIX+username,forgetToken);
             return ServerResponse.createBySuccess(forgetToken);
         }
         return ServerResponse.createByErrorMessage("问题的答案错误");
+    }
+
+    public ServerResponse<String> forgetResetPassword(String username,String passwordNew,String forgetToken){
+        if (StringUtils.isBlank(forgetToken)){
+            return ServerResponse.createByErrorMessage("参数错误，Token需要传递");
+        }
+        ServerResponse validResponse=this.checkValid(username,Const.USERNAME);
+        if (validResponse.isSuccess()) {
+            //用户不存在
+            return ServerResponse.createByErrorMessage("用户不存在");
+        }
+        String token=TokenCache.getKey(TokenCache.TOKEN_PREFIX+username);
+        if (StringUtils.isBlank(token)){
+            return ServerResponse.createByErrorMessage("Token无效或者过期");
+        }
+        if (StringUtils.equals(token,forgetToken)){
+            String md5password=MD5Util.MD5EncodeUtf8(passwordNew);
+            int resultCount=userMapper.updatePasswordByUsername(username,md5password);
+            if (resultCount>0){
+                return ServerResponse.createBySuccessMessage("修改密码成功");
+            }
+        }else {
+            return ServerResponse.createByErrorMessage("token错误，请重新获取重置密码的token");
+        }
+        return ServerResponse.createByErrorMessage("修改密码错误");
     }
 
 }
