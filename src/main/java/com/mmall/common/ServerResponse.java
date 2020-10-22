@@ -32,7 +32,6 @@ public class ServerResponse<T> implements Serializable {
     public boolean isSuccess(){
         return this.status == ResponseCode.SUCCESS.getCode();
     }
-
     public int getStatus() {
         return status;
     }
