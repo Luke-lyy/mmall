@@ -84,7 +84,7 @@
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.mmall.pojo.Category" >
     update mmall_category
-    <set >
+    <set>
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
       </if>
@@ -116,4 +116,11 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCategoryChildrenByParentId" resultMap="BaseResultMap" parameterType="int">
+    select
+    <include refid="Base_Column_List"/>
+    from mmall_category
+    where parent_id = #{parentId}
+  </select>
 </mapper>
