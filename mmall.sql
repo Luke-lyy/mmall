@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2020-10-23 09:16:13
+Date: 2020-11-06 13:58:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,7 +49,7 @@ CREATE TABLE `mmall_category` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100033 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100035 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mmall_category
@@ -84,6 +84,7 @@ INSERT INTO `mmall_category` VALUES ('100027', '100005', '红酒', '1', null, '2
 INSERT INTO `mmall_category` VALUES ('100028', '100005', '饮料', '1', null, '2020-10-23 16:46:00', '2020-10-23 19:46:00');
 INSERT INTO `mmall_category` VALUES ('100029', '100005', '调制鸡尾酒', '1', null, '2020-10-23 16:46:00', '2020-10-23 19:46:00');
 INSERT INTO `mmall_category` VALUES ('100030', '100005', '进口洋酒', '1', null, '2020-10-23 16:46:00', '2020-10-23 19:46:00');
+INSERT INTO `mmall_category` VALUES ('100033', '0', '家用电器子分类', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for mmall_order
