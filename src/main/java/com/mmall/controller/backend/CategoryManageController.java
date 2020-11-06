@@ -83,7 +83,7 @@ public class CategoryManageController {
         if (iUserService.checkAdminRole(user).isSuccess()){
             //是管理员,查询当前节点的id和递归子节点的id
             //0->10000->100000
-            return null;
+            return iCategoryService.selectCategoryAndChildrenById(categoryId);
         }else {
             return ServerResponse.createByErrorMessage("无权限操作，需要联系管理员");
         }
