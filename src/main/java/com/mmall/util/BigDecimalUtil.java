@@ -6,11 +6,9 @@ import java.math.BigDecimal;
  * Created by geely
  */
 public class BigDecimalUtil {
-
     private BigDecimalUtil(){
 
     }
-
 
     public static BigDecimal add(double v1,double v2){
         BigDecimal b1 = new BigDecimal(Double.toString(v1));
